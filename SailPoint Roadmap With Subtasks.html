@@ -1,0 +1,2119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SailPoint IIQ Developer Roadmap 2026 - With Subtasks</title>
+    <style>
+        :root {
+            --color-bg-primary: #0a0e27;
+            --color-bg-secondary: #151934;
+            --color-bg-card: #1a1f3a;
+            --color-accent-cyan: #20B2AA;
+            --color-accent-purple: #7C3AED;
+            --color-accent-pink: #EC4899;
+            --color-success: #10B981;
+            --color-warning: #F59E0B;
+            --color-danger: #EF4444;
+            --color-text-primary: #F9FAFB;
+            --color-text-secondary: #9CA3AF;
+            --color-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .background-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, rgba(32, 178, 170, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-50px, -50px); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--color-accent-cyan) 0%, var(--color-accent-purple) 100%);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 800;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(32, 178, 170, 0.2);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--color-accent-cyan), var(--color-accent-purple));
+        }
+
+        .stat-label {
+            color: var(--color-text-secondary);
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--color-accent-cyan), var(--color-accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-subtitle {
+            font-size: 0.85em;
+            color: var(--color-text-secondary);
+            margin-top: 4px;
+        }
+
+        .progress-container {
+            background: var(--color-bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 40px;
+            border: 1px solid var(--color-border);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .progress-bar-bg {
+            height: 24px;
+            background: var(--color-bg-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-accent-cyan), var(--color-accent-purple), var(--color-accent-pink));
+            border-radius: 12px;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .cert-section {
+            background: var(--color-bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 40px;
+            border: 1px solid var(--color-border);
+        }
+
+        .cert-section h2 {
+            font-size: 1.8em;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cert-icon {
+            font-size: 1.5em;
+        }
+
+        .cert-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .cert-item {
+            background: var(--color-bg-secondary);
+            border-radius: 12px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: auto 1fr auto auto auto;
+            align-items: center;
+            gap: 16px;
+            border: 1px solid var(--color-border);
+            transition: all 0.3s ease;
+        }
+
+        .cert-item:hover {
+            border-color: var(--color-accent-cyan);
+            transform: translateX(5px);
+        }
+
+        .cert-status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .cert-status.completed {
+            background: var(--color-success);
+        }
+
+        .cert-status.pending {
+            background: var(--color-warning);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .cert-name {
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+
+        .cert-month {
+            color: var(--color-text-secondary);
+            font-size: 0.9em;
+        }
+
+        .cert-cost {
+            background: linear-gradient(135deg, rgba(32, 178, 170, 0.2), rgba(124, 58, 237, 0.2));
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .cert-badge {
+            font-size: 1.5em;
+        }
+
+        .month-section {
+            background: var(--color-bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 30px;
+            border: 1px solid var(--color-border);
+        }
+
+        .month-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .month-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--color-accent-cyan), var(--color-accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .month-progress {
+            font-size: 0.95em;
+            color: var(--color-text-secondary);
+            padding: 8px 16px;
+            background: var(--color-bg-secondary);
+            border-radius: 20px;
+        }
+
+        .task-card {
+            background: var(--color-bg-secondary);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid var(--color-border);
+            transition: all 0.3s ease;
+        }
+
+        .task-card:hover {
+            border-color: var(--color-accent-cyan);
+            box-shadow: 0 4px 20px rgba(32, 178, 170, 0.15);
+        }
+
+        .task-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .task-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--color-border);
+            border-radius: 6px;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+        }
+
+        .task-checkbox:hover {
+            border-color: var(--color-accent-cyan);
+            transform: scale(1.1);
+        }
+
+        .task-checkbox.checked {
+            background: linear-gradient(135deg, var(--color-accent-cyan), var(--color-accent-purple));
+            border-color: transparent;
+        }
+
+        .task-checkbox.checked::after {
+            content: '✓';
+            color: white;
+            font-weight: bold;
+        }
+
+        .task-content {
+            flex: 1;
+        }
+
+        .task-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .expand-icon {
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+            color: var(--color-accent-cyan);
+        }
+
+        .expand-icon.expanded {
+            transform: rotate(90deg);
+        }
+
+        .task-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .task-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-critical {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--color-danger);
+        }
+
+        .badge-important {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--color-warning);
+        }
+
+        .badge-optional {
+            background: rgba(156, 163, 175, 0.2);
+            color: var(--color-text-secondary);
+        }
+
+        .subtasks {
+            margin-top: 16px;
+            margin-left: 40px;
+            padding-left: 20px;
+            border-left: 2px solid var(--color-border);
+            display: none;
+        }
+
+        .subtasks.show {
+            display: block;
+        }
+
+        .subtask-item {
+            display: flex;
+            align-items: start;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 12px;
+            background: var(--color-bg-primary);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .subtask-item:hover {
+            background: rgba(32, 178, 170, 0.05);
+        }
+
+        .subtask-checkbox {
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--color-border);
+            border-radius: 4px;
+            cursor: pointer;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .subtask-checkbox:hover {
+            border-color: var(--color-accent-cyan);
+        }
+
+        .subtask-checkbox.checked {
+            background: var(--color-accent-cyan);
+            border-color: transparent;
+        }
+
+        .subtask-checkbox.checked::after {
+            content: '✓';
+            color: white;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .subtask-text {
+            flex: 1;
+            font-size: 0.95em;
+            color: var(--color-text-secondary);
+        }
+
+        .task-comments {
+            width: 100%;
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 12px;
+            color: var(--color-text-primary);
+            font-family: inherit;
+            resize: vertical;
+            min-height: 60px;
+            transition: border-color 0.3s ease;
+            margin-top: 12px;
+        }
+
+        .task-comments:focus {
+            outline: none;
+            border-color: var(--color-accent-cyan);
+        }
+
+        .ai-assistant {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .ai-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-accent-cyan), var(--color-accent-purple));
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(32, 178, 170, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            transition: all 0.3s ease;
+        }
+
+        .ai-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 40px rgba(32, 178, 170, 0.6);
+        }
+
+        .ai-chat {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 380px;
+            max-height: 600px;
+            background: var(--color-bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            display: none;
+            flex-direction: column;
+        }
+
+        .ai-chat.active {
+            display: flex;
+        }
+
+        .ai-header {
+            padding: 20px;
+            background: linear-gradient(135deg, var(--color-accent-cyan), var(--color-accent-purple));
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ai-header h3 {
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .ai-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ai-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 400px;
+        }
+
+        .ai-message {
+            background: var(--color-bg-secondary);
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .ai-input-container {
+            padding: 16px;
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            gap: 12px;
+        }
+
+        .ai-input {
+            flex: 1;
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 12px;
+            color: var(--color-text-primary);
+            font-family: inherit;
+        }
+
+        .ai-input:focus {
+            outline: none;
+            border-color: var(--color-accent-cyan);
+        }
+
+        .ai-send {
+            background: linear-gradient(135deg, var(--color-accent-cyan), var(--color-accent-purple));
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+        }
+
+        .ai-send:hover {
+            transform: scale(1.05);
+        }
+
+        .filters {
+            background: var(--color-bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+            border: 1px solid var(--color-border);
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: var(--color-text-secondary);
+        }
+
+        .filter-btn {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-primary);
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--color-accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--color-accent-cyan), var(--color-accent-purple));
+            border-color: transparent;
+        }
+
+        .export-btn {
+            background: linear-gradient(135deg, var(--color-accent-purple), var(--color-accent-pink));
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            margin-left: auto;
+        }
+
+        .export-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cert-item {
+                grid-template-columns: auto 1fr;
+                gap: 12px;
+            }
+
+            .cert-cost, .cert-badge {
+                grid-column: 2;
+            }
+
+            .ai-chat {
+                width: calc(100vw - 40px);
+                right: 20px;
+            }
+
+            .filters {
+                justify-content: center;
+            }
+
+            .export-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .subtasks {
+                margin-left: 20px;
+                padding-left: 10px;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--color-accent-cyan), var(--color-accent-purple));
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🚀 SailPoint IIQ Developer Roadmap 2026</h1>
+            <p>4-Month Career Transformation | 35 Main Tasks + 70 Subtasks = 105 Total</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Overall Progress</div>
+                <div class="stat-value" id="overallProgress">1%</div>
+                <div class="stat-subtitle" id="progressSubtitle">1 of 105 tasks completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Certifications</div>
+                <div class="stat-value">1/6</div>
+                <div class="stat-subtitle">Identity Security Leader ✅</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Days Remaining</div>
+                <div class="stat-value" id="daysRemaining">122</div>
+                <div class="stat-subtitle">Until Jun 5, 2026</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Target Salary</div>
+                <div class="stat-value">₹15-20L</div>
+                <div class="stat-subtitle">With certs + projects</div>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-header">
+                <span style="font-weight: 600; font-size: 1.1em;">📊 Journey Progress</span>
+                <span id="progressPercent" style="font-weight: 700; font-size: 1.2em;">1%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar" style="width: 1%"></div>
+            </div>
+        </div>
+
+        <div class="cert-section">
+            <h2><span class="cert-icon">🏆</span> Certification & Badge Tracker</h2>
+            <div class="cert-grid">
+                <div class="cert-item">
+                    <div class="cert-status completed"></div>
+                    <div>
+                        <div class="cert-name">SailPoint Identity Security Leader</div>
+                        <div class="cert-month">Month 1 - Week 1</div>
+                    </div>
+                    <div class="cert-cost">FREE</div>
+                    <div class="cert-badge">✅</div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-status pending"></div>
+                    <div>
+                        <div class="cert-name">SailPoint IIQ Associate Developer</div>
+                        <div class="cert-month">Month 2 - Week 4</div>
+                    </div>
+                    <div class="cert-cost">₹25K</div>
+                    <div class="cert-badge">🎯</div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-status pending"></div>
+                    <div>
+                        <div class="cert-name">Azure SC-300 Identity Admin</div>
+                        <div class="cert-month">Month 3 - Week 3</div>
+                    </div>
+                    <div class="cert-cost">₹12-15K</div>
+                    <div class="cert-badge">⭐</div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-status pending"></div>
+                    <div>
+                        <div class="cert-name">AWS IAM Learning Badge</div>
+                        <div class="cert-month">Month 3 - Week 3</div>
+                    </div>
+                    <div class="cert-cost">FREE</div>
+                    <div class="cert-badge">🔐</div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-status pending"></div>
+                    <div>
+                        <div class="cert-name">AWS Cloud Security Fundamentals</div>
+                        <div class="cert-month">Month 3 - Week 3</div>
+                    </div>
+                    <div class="cert-cost">FREE</div>
+                    <div class="cert-badge">☁️</div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-status pending"></div>
+                    <div>
+                        <div class="cert-name">Microsoft Entra Fundamentals</div>
+                        <div class="cert-month">Month 4 - Week 2</div>
+                    </div>
+                    <div class="cert-cost">FREE</div>
+                    <div class="cert-badge">🎓</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <span class="filter-label">Filter by:</span>
+            <button class="filter-btn active" onclick="filterTasks('all')">All Tasks</button>
+            <button class="filter-btn" onclick="filterTasks('critical')">Critical</button>
+            <button class="filter-btn" onclick="filterTasks('important')">Important</button>
+            <button class="filter-btn" onclick="filterTasks('pending')">Pending</button>
+            <button class="filter-btn" onclick="filterTasks('completed')">Completed</button>
+            <button class="export-btn" onclick="exportProgress()">
+                <span>📥</span>
+                Export Progress
+            </button>
+        </div>
+
+        <div class="month-section">
+            <div class="month-header">
+                <div class="month-title">Month 1: Foundation</div>
+                <div class="month-progress">Feb 14 - Mar 13 | 1/12 tasks</div>
+            </div>
+
+            <!-- Task 1: SailPoint Badge (COMPLETED) -->
+            <div class="task-card" data-priority="critical" data-status="completed" data-task-id="m1t1">
+                <div class="task-header">
+                    <div class="task-checkbox checked" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title">✅ SailPoint Identity Security Leader Badge (FREE)</div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-critical">CRITICAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 1-2</span>
+                        </div>
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)">Completed on Feb 5, 2026. Badge added to LinkedIn profile.</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 2: BeanShell Syntax -->
+            <div class="task-card" data-priority="critical" data-status="pending" data-task-id="m1t2">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title" onclick="toggleSubtasks('m1t2')">
+                            <span class="expand-icon">▶</span>
+                            Learn BeanShell Syntax (Java-like scripting)
+                        </div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-critical">CRITICAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 1-2</span>
+                        </div>
+                        
+                        <div class="subtasks" id="subtasks-m1t2">
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Variables and data types</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Control flow (if/else, loops)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Collections (Maps, Lists, Arrays)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Exception handling basics</div>
+                            </div>
+                        </div>
+                        
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 3: InfoSecTrain -->
+            <div class="task-card" data-priority="critical" data-status="pending" data-task-id="m1t3">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title">Watch InfoSecTrain SailPoint IdentityIQ Masterclass</div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-critical">CRITICAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 1-2</span>
+                        </div>
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 4: IIQ Architecture -->
+            <div class="task-card" data-priority="critical" data-status="pending" data-task-id="m1t4">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title" onclick="toggleSubtasks('m1t4')">
+                            <span class="expand-icon">▶</span>
+                            Understand SailPoint IIQ Architecture
+                        </div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-critical">CRITICAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 1-2</span>
+                        </div>
+                        
+                        <div class="subtasks" id="subtasks-m1t4">
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Core Identity Manager concepts</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Connector types and usage</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Lifecycle Manager (JML)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Provisioning and workflows</div>
+                            </div>
+                        </div>
+                        
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 5: AD/LDAP -->
+            <div class="task-card" data-priority="important" data-status="pending" data-task-id="m1t5">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title">Understand Active Directory & LDAP Basics</div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-important">IMPORTANT</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 1-2</span>
+                        </div>
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 6: RBAC/SoD -->
+            <div class="task-card" data-priority="important" data-status="pending" data-task-id="m1t6">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title">Learn RBAC, SoD, and JML Concepts</div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-important">IMPORTANT</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 1-2</span>
+                        </div>
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 7: BeanShell Snippets -->
+            <div class="task-card" data-priority="critical" data-status="pending" data-task-id="m1t7">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title" onclick="toggleSubtasks('m1t7')">
+                            <span class="expand-icon">▶</span>
+                            Write 5-10 BeanShell Code Snippets
+                        </div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-critical">CRITICAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 3-4</span>
+                        </div>
+                        
+                        <div class="subtasks" id="subtasks-m1t7">
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Loop through identity attributes</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Conditional role assignment logic</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Map manipulation for attributes</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">String formatting for email/DN</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Exception handling example</div>
+                            </div>
+                        </div>
+                        
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 8: GitHub -->
+            <div class="task-card" data-priority="critical" data-status="pending" data-task-id="m1t8">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title">Create GitHub Account & Setup Portfolio Repo</div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-critical">CRITICAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 3-4</span>
+                        </div>
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 9: Blog Posts -->
+            <div class="task-card" data-priority="important" data-status="pending" data-task-id="m1t9">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title" onclick="toggleSubtasks('m1t9')">
+                            <span class="expand-icon">▶</span>
+                            Write 3-4 Technical Blog Posts (LinkedIn/Medium)
+                        </div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-important">IMPORTANT</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 3-4</span>
+                        </div>
+                        
+                        <div class="subtasks" id="subtasks-m1t9">
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Post 1: Joiner-Mover-Leaver explanation</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Post 2: SailPoint workflows overview</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Post 3: My career transition journey</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Post 4: BeanShell basics for beginners</div>
+                            </div>
+                        </div>
+                        
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 10: Cert Prep -->
+            <div class="task-card" data-priority="important" data-status="pending" data-task-id="m1t10">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title">Start SailPoint Associate Certification Prep</div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-important">IMPORTANT</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 3-4</span>
+                        </div>
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 11: Compliance -->
+            <div class="task-card" data-priority="important" data-status="pending" data-task-id="m1t11">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title">Understand Compliance Standards (SOX, GDPR, Least Privilege)</div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-important">IMPORTANT</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 3-4</span>
+                        </div>
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 12: Communities -->
+            <div class="task-card" data-priority="optional" data-status="pending" data-task-id="m1t12">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title">Join SailPoint Communities (Reddit, LinkedIn Groups)</div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-optional">OPTIONAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 3-4</span>
+                        </div>
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MONTH 2: IIQ Development -->
+        <div class="month-section">
+            <div class="month-header">
+                <div class="month-title">Month 2: IIQ Development</div>
+                <div class="month-progress">Mar 14 - Apr 10 | 0/8 tasks</div>
+            </div>
+
+            <!-- Task 1: Training Enrollment -->
+            <div class="task-card" data-priority="critical" data-status="pending" data-task-id="m2t1">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title" onclick="toggleSubtasks('m2t1')">
+                            <span class="expand-icon">▶</span>
+                            Enroll in Paid SailPoint Training (₹20-25K)
+                        </div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-critical">CRITICAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 1</span>
+                        </div>
+                        
+                        <div class="subtasks" id="subtasks-m2t1">
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Research and compare training providers</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Register and pay for selected course</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Get access to virtual lab environment</div>
+                            </div>
+                        </div>
+                        
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 2: Workflows Training -->
+            <div class="task-card" data-priority="critical" data-status="pending" data-task-id="m2t2">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title" onclick="toggleSubtasks('m2t2')">
+                            <span class="expand-icon">▶</span>
+                            Complete Workflows & Rules Training
+                        </div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-critical">CRITICAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 2-3</span>
+                        </div>
+                        
+                        <div class="subtasks" id="subtasks-m2t2">
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Workflow basics and structure</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Rule types (correlation, policy, provisioning)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Email template customization</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Task definitions and approvals</div>
+                            </div>
+                        </div>
+                        
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 3: Connectors Training -->
+            <div class="task-card" data-priority="critical" data-status="pending" data-task-id="m2t3">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title" onclick="toggleSubtasks('m2t3')">
+                            <span class="expand-icon">▶</span>
+                            Complete Application Onboarding & Connectors Training
+                        </div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-critical">CRITICAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 2-3</span>
+                        </div>
+                        
+                        <div class="subtasks" id="subtasks-m2t3">
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Active Directory connector setup</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">LDAP connector configuration</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">JDBC database connectors</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">REST/SOAP API connectors</div>
+                            </div>
+                        </div>
+                        
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 4: JML Training -->
+            <div class="task-card" data-priority="critical" data-status="pending" data-task-id="m2t4">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title">Complete Lifecycle Manager & JML Training</div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-critical">CRITICAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 2-3</span>
+                        </div>
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 5: SQL Basics -->
+            <div class="task-card" data-priority="important" data-status="pending" data-task-id="m2t5">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title">Learn SQL Basics (for JDBC Connectors)</div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-important">IMPORTANT</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 2-3</span>
+                        </div>
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 6: Project 1 -->
+            <div class="task-card" data-priority="critical" data-status="pending" data-task-id="m2t6">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title" onclick="toggleSubtasks('m2t6')">
+                            <span class="expand-icon">▶</span>
+                            🎯 Build Portfolio Project 1: Complete JML Automation
+                        </div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-critical">CRITICAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 4</span>
+                        </div>
+                        
+                        <div class="subtasks" id="subtasks-m2t6">
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Joiner workflow + manager assignment rule</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Mover workflow + role reassignment</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Leaver workflow + GDPR compliance</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">5-10 BeanShell rules written</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Email templates + notifications</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Test cases documented</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Architecture diagram created</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">README with clear documentation</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Code comments and explanations</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Push to GitHub (public repo)</div>
+                            </div>
+                        </div>
+                        
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 7: Certification -->
+            <div class="task-card" data-priority="critical" data-status="pending" data-task-id="m2t7">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title" onclick="toggleSubtasks('m2t7')">
+                            <span class="expand-icon">▶</span>
+                            🏆 PASS SailPoint Certified IdentityIQ Associate Exam (₹25K)
+                        </div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-critical">CRITICAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 4</span>
+                        </div>
+                        
+                        <div class="subtasks" id="subtasks-m2t7">
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Complete practice exams (70%+ score)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Review weak areas</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Schedule official exam</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">PASS certification exam!</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Add badge to LinkedIn profile</div>
+                            </div>
+                        </div>
+                        
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 8: More Blogs -->
+            <div class="task-card" data-priority="important" data-status="pending" data-task-id="m2t8">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title">Write 2-3 More Technical Blog Posts</div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-important">IMPORTANT</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 4</span>
+                        </div>
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MONTH 3: Advanced + Azure SC-300 -->
+        <div class="month-section">
+            <div class="month-header">
+                <div class="month-title">Month 3: Advanced + Azure SC-300</div>
+                <div class="month-progress">Apr 11 - May 8 | 0/7 tasks</div>
+            </div>
+
+            <!-- Task 1: Advanced Topics -->
+            <div class="task-card" data-priority="important" data-status="pending" data-task-id="m3t1">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title" onclick="toggleSubtasks('m3t1')">
+                            <span class="expand-icon">▶</span>
+                            Study Advanced SailPoint Topics
+                        </div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-important">IMPORTANT</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 1-2</span>
+                        </div>
+                        
+                        <div class="subtasks" id="subtasks-m3t1">
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Custom connector development patterns</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Performance optimization techniques</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">REST API usage in SailPoint</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Advanced certification workflows</div>
+                            </div>
+                        </div>
+                        
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 2: Project 2 -->
+            <div class="task-card" data-priority="critical" data-status="pending" data-task-id="m3t2">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title" onclick="toggleSubtasks('m3t2')">
+                            <span class="expand-icon">▶</span>
+                            🎯 Build Portfolio Project 2: SoD + Role Mining
+                        </div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-critical">CRITICAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 1-2</span>
+                        </div>
+                        
+                        <div class="subtasks" id="subtasks-m3t2">
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Design role hierarchy (3-4 levels)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Create SoD policies (2-3 conflict scenarios)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Violation detection rules (BeanShell)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Custom approval workflows</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Remediation workflow logic</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Audit reports + compliance docs</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">REST API integration example</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Production-quality code + comments</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Complete documentation + diagrams</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Push to GitHub</div>
+                            </div>
+                        </div>
+                        
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 3: Azure SC-300 -->
+            <div class="task-card" data-priority="critical" data-status="pending" data-task-id="m3t3">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title">⭐ Azure SC-300 Identity Admin Certification (₹12-15K)</div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-critical">CRITICAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 3</span>
+                        </div>
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 4: AWS IAM -->
+            <div class="task-card" data-priority="important" data-status="pending" data-task-id="m3t4">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title">🔐 AWS IAM Learning Badge (FREE)</div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-important">IMPORTANT</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 3</span>
+                        </div>
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 5: AWS Cloud Security -->
+            <div class="task-card" data-priority="important" data-status="pending" data-task-id="m3t5">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title">☁️ AWS Cloud Security Fundamentals Badge (FREE)</div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-important">IMPORTANT</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 3</span>
+                        </div>
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 6: Interview Questions -->
+            <div class="task-card" data-priority="critical" data-status="pending" data-task-id="m3t6">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title" onclick="toggleSubtasks('m3t6')">
+                            <span class="expand-icon">▶</span>
+                            Study 50+ SailPoint Interview Questions
+                        </div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-critical">CRITICAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 3-4</span>
+                        </div>
+                        
+                        <div class="subtasks" id="subtasks-m3t6">
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">IIQ basics (10 questions)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">BeanShell coding (10 questions)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">JML/Workflows (10 questions)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Connectors (10 questions)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Behavioral (10 questions)</div>
+                            </div>
+                        </div>
+                        
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 7: Mock Interviews -->
+            <div class="task-card" data-priority="critical" data-status="pending" data-task-id="m3t7">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title" onclick="toggleSubtasks('m3t7')">
+                            <span class="expand-icon">▶</span>
+                            Complete 3-5 Mock Interviews
+                        </div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-critical">CRITICAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 3-4</span>
+                        </div>
+                        
+                        <div class="subtasks" id="subtasks-m3t7">
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Mock interview 1 (basics)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Mock interview 2 (technical deep dive)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Mock interview 3 (behavioral)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Mock interview 4 (project walkthrough)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Mock interview 5 (full simulation)</div>
+                            </div>
+                        </div>
+                        
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MONTH 4: Job Offers -->
+        <div class="month-section">
+            <div class="month-header">
+                <div class="month-title">Month 4: Job Offers</div>
+                <div class="month-progress">May 9 - Jun 5 | 0/8 tasks</div>
+            </div>
+
+            <!-- Task 1: Resume -->
+            <div class="task-card" data-priority="critical" data-status="pending" data-task-id="m4t1">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title" onclick="toggleSubtasks('m4t1')">
+                            <span class="expand-icon">▶</span>
+                            Polish Resume & LinkedIn Profile
+                        </div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-critical">CRITICAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 1</span>
+                        </div>
+                        
+                        <div class="subtasks" id="subtasks-m4t1">
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Rewrite support experience (highlight impact)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Add Project 1 & 2 with GitHub links</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Add skills: BeanShell, SailPoint IIQ, etc.</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Add SailPoint Associate certification</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">LinkedIn headline update</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">LinkedIn summary (career transition story)</div>
+                            </div>
+                        </div>
+                        
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 2: Networking -->
+            <div class="task-card" data-priority="important" data-status="pending" data-task-id="m4t2">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title">Network: Connect with 50+ IAM Professionals on LinkedIn</div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-important">IMPORTANT</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 1</span>
+                        </div>
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 3: Entra Badge -->
+            <div class="task-card" data-priority="important" data-status="pending" data-task-id="m4t3">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title">🎓 Microsoft Entra Fundamentals Badge (FREE)</div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-important">IMPORTANT</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 2</span>
+                        </div>
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 4: Apply -->
+            <div class="task-card" data-priority="critical" data-status="pending" data-task-id="m4t4">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title" onclick="toggleSubtasks('m4t4')">
+                            <span class="expand-icon">▶</span>
+                            Apply to 10-15 SailPoint Developer Roles
+                        </div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-critical">CRITICAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 1-2</span>
+                        </div>
+                        
+                        <div class="subtasks" id="subtasks-m4t4">
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Application 1-3 (week 1)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Application 4-6 (week 1)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Application 7-9 (week 2)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Application 10-12 (week 2)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Application 13-15 (week 2)</div>
+                            </div>
+                        </div>
+                        
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 5: Job Alerts -->
+            <div class="task-card" data-priority="important" data-status="pending" data-task-id="m4t5">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title">Set Up Job Alerts (LinkedIn, Indeed, Naukri, Shine)</div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-important">IMPORTANT</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 1-2</span>
+                        </div>
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 6: Recruiters -->
+            <div class="task-card" data-priority="important" data-status="pending" data-task-id="m4t6">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title">Reach Out to Recruiters (5-10 IAM-focused recruiters)</div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-important">IMPORTANT</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 1-2</span>
+                        </div>
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 7: Interviews -->
+            <div class="task-card" data-priority="critical" data-status="pending" data-task-id="m4t7">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title" onclick="toggleSubtasks('m4t7')">
+                            <span class="expand-icon">▶</span>
+                            Complete 5-8 Real Interviews
+                        </div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-critical">CRITICAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 3</span>
+                        </div>
+                        
+                        <div class="subtasks" id="subtasks-m4t7">
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Interview 1 (company + date)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Interview 2 (company + date)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Interview 3 (company + date)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Interview 4 (company + date)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Interview 5 (company + date)</div>
+                            </div>
+                        </div>
+                        
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task 8: Offers -->
+            <div class="task-card" data-priority="critical" data-status="pending" data-task-id="m4t8">
+                <div class="task-header">
+                    <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                    <div class="task-content">
+                        <div class="task-title" onclick="toggleSubtasks('m4t8')">
+                            <span class="expand-icon">▶</span>
+                            🎉 Receive 2-3 Job Offers & ACCEPT BEST OFFER!
+                        </div>
+                        <div class="task-meta">
+                            <span class="task-badge badge-critical">CRITICAL</span>
+                            <span style="color: var(--color-text-secondary); font-size: 0.9em;">Week 4</span>
+                        </div>
+                        
+                        <div class="subtasks" id="subtasks-m4t8">
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Offer 1 received (company + CTC)</div>
+                            </div>
+                            <div class="subtask-item">
+                                <div class="subtask-checkbox" onclick="toggleSubtask(this)"></div>
+                                <div class="subtask-text">Offer 2 received (company + CTC)</div>
+                            </div>
+                        </div>
+                        
+                        <textarea class="task-comments" placeholder="Add your comments here..." onchange="saveComments(this)"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Assistant -->
+    <div class="ai-assistant">
+        <button class="ai-button" onclick="toggleAI()">🤖</button>
+        <div class="ai-chat" id="aiChat">
+            <div class="ai-header">
+                <h3>AI Career Assistant</h3>
+                <button class="ai-close" onclick="toggleAI()">×</button>
+            </div>
+            <div class="ai-messages" id="aiMessages">
+                <div class="ai-message">
+                    👋 Hi! I'm your SailPoint career assistant. Ask me about:
+                    <br>• BeanShell coding help
+                    <br>• Interview preparation
+                    <br>• Project ideas
+                    <br>• Certification tips
+                    <br>• Job application strategy
+                </div>
+            </div>
+            <div class="ai-input-container">
+                <input type="text" class="ai-input" id="aiInput" placeholder="Ask me anything..." onkeypress="handleAIEnter(event)">
+                <button class="ai-send" onclick="sendAIMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let savedData = JSON.parse(localStorage.getItem('sailpointRoadmapV2')) || {
+            tasks: {},
+            subtasks: {},
+            comments: {}
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSavedState();
+            updateProgress();
+            calculateDaysRemaining();
+        });
+
+        function toggleSubtasks(taskId) {
+            const subtasksDiv = document.getElementById('subtasks-' + taskId);
+            const expandIcon = event.target.closest('.task-title').querySelector('.expand-icon');
+            
+            if (subtasksDiv) {
+                subtasksDiv.classList.toggle('show');
+                if (expandIcon) {
+                    expandIcon.classList.toggle('expanded');
+                }
+            }
+        }
+
+        function toggleTask(checkbox) {
+            const taskCard = checkbox.closest('.task-card');
+            const taskId = taskCard.getAttribute('data-task-id');
+            
+            checkbox.classList.toggle('checked');
+            
+            if (checkbox.classList.contains('checked')) {
+                taskCard.setAttribute('data-status', 'completed');
+                savedData.tasks[taskId] = true;
+            } else {
+                taskCard.setAttribute('data-status', 'pending');
+                savedData.tasks[taskId] = false;
+            }
+            
+            localStorage.setItem('sailpointRoadmapV2', JSON.stringify(savedData));
+            updateProgress();
+        }
+
+        function toggleSubtask(checkbox) {
+            const subtaskItem = checkbox.closest('.subtask-item');
+            const taskCard = checkbox.closest('.task-card');
+            const taskId = taskCard.getAttribute('data-task-id');
+            const subtaskText = subtaskItem.querySelector('.subtask-text').textContent;
+            const subtaskKey = taskId + '::' + subtaskText;
+            
+            checkbox.classList.toggle('checked');
+            
+            if (checkbox.classList.contains('checked')) {
+                savedData.subtasks[subtaskKey] = true;
+            } else {
+                savedData.subtasks[subtaskKey] = false;
+            }
+            
+            localStorage.setItem('sailpointRoadmapV2', JSON.stringify(savedData));
+            updateProgress();
+        }
+
+        function saveComments(textarea) {
+            const taskCard = textarea.closest('.task-card');
+            const taskId = taskCard.getAttribute('data-task-id');
+            savedData.comments[taskId] = textarea.value;
+            localStorage.setItem('sailpointRoadmapV2', JSON.stringify(savedData));
+        }
+
+        function loadSavedState() {
+            // Load main tasks
+            document.querySelectorAll('.task-card').forEach(card => {
+                const taskId = card.getAttribute('data-task-id');
+                const checkbox = card.querySelector('.task-checkbox');
+                const textarea = card.querySelector('.task-comments');
+                
+                if (savedData.tasks[taskId]) {
+                    checkbox.classList.add('checked');
+                    card.setAttribute('data-status', 'completed');
+                }
+                
+                if (savedData.comments[taskId]) {
+                    textarea.value = savedData.comments[taskId];
+                }
+            });
+
+            // Load subtasks
+            document.querySelectorAll('.subtask-item').forEach(item => {
+                const taskCard = item.closest('.task-card');
+                const taskId = taskCard.getAttribute('data-task-id');
+                const subtaskText = item.querySelector('.subtask-text').textContent;
+                const subtaskKey = taskId + '::' + subtaskText;
+                const checkbox = item.querySelector('.subtask-checkbox');
+                
+                if (savedData.subtasks[subtaskKey]) {
+                    checkbox.classList.add('checked');
+                }
+            });
+        }
+
+        function updateProgress() {
+            const allTasks = document.querySelectorAll('.task-card').length;
+            const completedTasks = document.querySelectorAll('.task-card[data-status="completed"]').length;
+            
+            const allSubtasks = document.querySelectorAll('.subtask-checkbox').length;
+            const completedSubtasks = document.querySelectorAll('.subtask-checkbox.checked').length;
+            
+            const totalItems = allTasks + allSubtasks;
+            const completedItems = completedTasks + completedSubtasks;
+            const percentage = Math.round((completedItems / totalItems) * 100);
+            
+            document.getElementById('progressBar').style.width = percentage + '%';
+            document.getElementById('progressPercent').textContent = percentage + '%';
+            document.getElementById('overallProgress').textContent = percentage + '%';
+            document.getElementById('progressSubtitle').textContent = `${completedItems} of ${totalItems} tasks completed`;
+        }
+
+        function calculateDaysRemaining() {
+            const endDate = new Date('2026-06-05');
+            const today = new Date();
+            const daysLeft = Math.ceil((endDate - today) / (1000 * 60 * 60 * 24));
+            document.getElementById('daysRemaining').textContent = daysLeft;
+        }
+
+        function filterTasks(filter) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            const allTasks = document.querySelectorAll('.task-card');
+            allTasks.forEach(task => {
+                const priority = task.getAttribute('data-priority');
+                const status = task.getAttribute('data-status');
+                
+                if (filter === 'all') {
+                    task.style.display = 'block';
+                } else if (filter === 'critical' || filter === 'important' || filter === 'optional') {
+                    task.style.display = priority === filter ? 'block' : 'none';
+                } else if (filter === 'pending' || filter === 'completed') {
+                    task.style.display = status === filter ? 'block' : 'none';
+                }
+            });
+        }
+
+        function exportProgress() {
+            const data = {
+                exportDate: new Date().toISOString(),
+                progress: savedData,
+                stats: {
+                    totalMainTasks: document.querySelectorAll('.task-card').length,
+                    completedMainTasks: document.querySelectorAll('.task-card[data-status="completed"]').length,
+                    totalSubtasks: document.querySelectorAll('.subtask-checkbox').length,
+                    completedSubtasks: document.querySelectorAll('.subtask-checkbox.checked').length,
+                    percentage: document.getElementById('progressPercent').textContent
+                }
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `sailpoint-roadmap-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function toggleAI() {
+            document.getElementById('aiChat').classList.toggle('active');
+        }
+
+        function handleAIEnter(event) {
+            if (event.key === 'Enter') {
+                sendAIMessage();
+            }
+        }
+
+        function sendAIMessage() {
+            const input = document.getElementById('aiInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                const messagesDiv = document.getElementById('aiMessages');
+                
+                const userMsg = document.createElement('div');
+                userMsg.className = 'ai-message';
+                userMsg.style.background = 'linear-gradient(135deg, rgba(32, 178, 170, 0.2), rgba(124, 58, 237, 0.2))';
+                userMsg.textContent = '👤 ' + message;
+                messagesDiv.appendChild(userMsg);
+                
+                setTimeout(() => {
+                    const botMsg = document.createElement('div');
+                    botMsg.className = 'ai-message';
+                    botMsg.textContent = '🤖 Great question! For real-time AI assistance, this would connect to an API. For now, check the task comments for guidance, or reach out on LinkedIn for personalized help!';
+                    messagesDiv.appendChild(botMsg);
+                    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                }, 1000);
+                
+                input.value = '';
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>
